@@ -1,0 +1,70 @@
+Ubuntu下搭建gitbook环境
+96  穆弋 关注
+2016.05.25 11:15* 字数 622 阅读 2107评论 5喜欢 8
+安装Git
+sudo apt-get install git
+
+安装node npm
+安装nvm
+cd ~
+mkdir .nvm
+cd .nvm
+git clone https://github.com/creationix/nvm
+等待下载完毕后将source ~/.nvm/nvm/nvm.sh添加到~/.profile之类的文件中
+vim ~/.profile 并在文件末尾添加source ~/.nvm/nvm/nvm.sh
+source 一下.profile
+nvm --version检查安装是否正确
+
+安装node
+nvm install node
+node --version
+
+安装npm
+git clone --recursive git://github.com/isaacs/npm.git
+cd npm
+node cli.js install npm -g
+可以用version检查安装是否正确
+
+安装gitbook
+npm install gitbook-cli -g
+可以用version检查安装是否正确
+
+最关键的一步，安装calibre
+calibre的安装非常繁杂，甚至其官方网站也有这样的提示：
+
+WARNING: calibre is a highly complex piece of software with lots of very finicky dependencies. If you install from source, you are on your own. Please do not open bug reports or expect any form of support. You have been warned.
+
+官方提供了快捷安装的方法，不过在那之前我们先解决好软件依赖问题：
+
+安装python2.7
+sudo apt-get install python2.7-dev
+wget https://bootstrap.pypa.io/ez_setup.py
+sudo python2 ez_setup.py install
+sudo easy_install-2.7 pip
+
+安装其他依赖
+sudo apt-get install ***
+太多了 这里给个列表http://www.calibre-ebook.com/download_linux 去这里查吧，不过大部分都是系统自带的，所以这步可以略过，如果之后的安装会有报错，会有提示你哪个库没有安装，这时候回来再安就好了。
+
+安装calibre
+安装的东西太多，需要用root权限，又容易出错，所以最好先su root
+su root
+
+这里需要输入root密码，如果你还没有改过默认的密码那就先sudo passwd root给root用户改密码
+wget -nv -O- https://raw.githubusercontent.com/kovidgoyal/calibre/master/setup/linux-installer.py | python -c "import sys; main=lambda x:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main('/opt')"
+
+上面命令最后的main('/opt')是安装位置，可以把'/opt'换掉
+
+这一长串就是安装的命令，安装比较慢，大家可以等着了。
+
+使用gitbook
+如果上述安装过程没有出错，就可以使用了。
+用之前别忘了退出root用户，root乃万恶之源，rm -rf为其武器。
+
+mkdir -p ~/gitbookworkspace/demo
+cd ~/gitbookworkspace/demo
+gitbook init
+这时demo文件夹下就有两个文件了
+gitbook build可以生成网页
+gitbook pdf ~/gitbookworkspace/demo ~/gitbookworkspace/demo.pdf可以生成pdf文件
+同理把pdf换成epub mobi也可以生成对应的文件。
