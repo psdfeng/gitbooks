@@ -99,10 +99,36 @@ The line django.core.context_processors.request is not valid in 1.10. Remove it 
          return self.name
 
 
-1.虚拟环境中mysql安装不了，makemigrations提示Did you install mysqlclient?
+#7.虚拟环境中mysql安装不了，makemigrations提示Did you install mysqlclient?
 虚拟环境需要安装包
 >sudo apt-get install libmysqlclient-dev
 
 然后再次安装
 
 >pip install mysqlclient -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
+
+#8.django 创建admin超级管理员
+python manage.py createsuperuser
+
+#9. django 在windows 平台连接mysql数据库问题 同步失败问题
+Go to your database (MySQL Terminal):
+
+>$ mysql
+
+mysql> SELECT * FROM django_migrations;
+
+If you see some records, good. Delete them.
+
+mysql> TRUNCATE TABLE django_migrations;
+
+Leave MySQL terminal, and run the migrations again in django:
+
+$ python manage.py migrate --fake-initial
+
+Make sure this message appears:
+
+0005_alter_user_last_login_null - [OK]
+
+then you might see some other conflicts, that is fine because we only need to make this migration.
+
+Restart your MySQL and Server and you're good to go.
