@@ -1,0 +1,136 @@
+一、Git是一个分布式的代码版本管理工具。类似的常用工具还有SVN,CVS。最大的特点也是优点在于提供分布式的代码管理
+1、分支代码只有一份！ 
+使用过svn的童鞋想必都知道，当我们要开发一个新功能或者增加一个新版本或者修改一个复杂bug的时候，通常需要copy整份代码到本地一个目录，然后添加到svn服务器上进行代码管理。 
+而Git不同，Git可以创建许多branches，每个branch都是独立的，当我们需要修改代码的时候，commit也只是对本地仓库的修改。如果使用SourceTree,我们会发现在工具栏的Git Flow功能，已经很好的为此做了准备。 
+2、log在本地！ 
+svn的log都是存储在服务器上的，当我们要查阅修改记录的时候，必须要能够连接上远程服务器，并且具有权限。而Git不同，Git对于本地仓库的修改记录都是在本地上的，方便查阅。 
+3、合并代码更加方便！ 
+因为Git支持本地无限Branches，当我们个体在本地创建多个branches用于不同目的的时候（修改，新增，探索），合并一份代码显然要比svn合并一堆工程copy更加简单。 
+4、更加安全！ 
+Git的commit命令不同于SVN，commit只是对本地仓库代码的一次更新。当需要提交到master远程仓库，或者其他远程分支仓库的时候，需要使用push功能。虽然增加了一个过程，却可以防止随意修改导致后期合并出现大问题的风险。 在用户工作的时候，从本地仓库修改文件（modified），写入git的暂存区域（staged），将暂存区域的内容提交到本地仓库（committed）。这一系列的工作都是在用户本机的本地仓库上进行的。当你将本地的仓库push到远程服务器上的仓库之前，远程仓库里是没有你的工作成果的。 
+5、目录更加简洁！ 
+在Git本地仓库根目录，只有一个.git文件,它包含了所有的管理信息。而SVN想必大家都知道，每个子目录下都有噁心的.svn。这个当需要修改文件冲突等问题时，就需要考虑了。肯定是一个文件简单。
+
+二、安装
+在进行安装前，要说一下，Git和SVN一样，都需要创建一个服务器的，他们都可以创建自己的版本管理服务器。对于个人和小团队来说，使用托管服务器可能更合适。 
+常见的有Github 和 Bitbucket。Github没有个人免费仓库使用，代码放上去就是开源的。Bitbucket的个人仓库相关页面已经基本汉化了。注册流程也比较简单。 
+MAC上最好的GIT免费GUI工具是SourceTree（没有之一）。此外，最好的GIT代码开源网站是GitHub，最好的GIT代码私有库是BitBucket。 
+安装过程： 
+1，下载Git installer，地址；http://git-scm.com/downloads 
+2，下载之后打开，双击.pkg安装 
+3， 打开终端，使用git –version或者which git命令查看安装版本，有就是安装成功了 
+4，创建一个全球用户名、全球邮箱，设置全局配置 
+git config –global user.name “用户名” 
+git config –global user.email “对应邮箱” 
+5、进入你的项目目录
+
+cd d:/wamp/www/wap              //首先指定到你的项目目录下
+git init
+touch README.md
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/youtname/vscode.git   
+//用你仓库的url,vscode.git中vscode为仓库名称,使用时必须先创建
+git push -u origin master  //提交到你的仓库
+
+作者：听城
+链接：http://www.jianshu.com/p/e9dd2849cfb0
+來源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+三、正式使用
+提交代码到git 
+回到vs code打开git工作区就会看到所有代码显示在这里 
+这里写图片描述
+点击+号，把所有文件提交到暂存区。 
+然后打开菜单选择–提交已暂存的 
+这里写图片描述
+
+然后按提示随便在消息框里输入一个消息，再按ctrl+enter提交
+
+这里写图片描述
+
+然后把所有暂存的代码push云端，
+
+这里写图片描述
+
+点击后，会弹出让你输入账号密码，把你托管平台的账号密码输入上去就行了 
+不出问题的话你整个项目就会提交到云端上了。 
+在vs中每次更新代码都会要输入账号密码，方便起见，可以配置一下让GIT记住密码账号。
+
+git config --global credential.helper store   //在Git Bash输入这个命令就可以了
+1
+同步代码 
+这里说下平时修改代码后提交到云端的使用，和本地代码和云端同步 
+　　随便打开一个文件，添加一个注释
+这里写图片描述
+
+可以看到git图标有一个提示，打开git工作区可以看到就是修改的这个文件 
+这里写图片描述
+
+然后点击右侧的+号，把他暂存起来。 
+再在消息框里输入消息，按ctrl+enter提交暂存
+
+这里写图片描述
+
+再点击push提交，代码就提交到云端了。
+
+这里写图片描述 
+打开 git就可以看到了
+
+更新回本地 
+比如当你在家里修改了代码提交到云端后，回到公司只需要用vscode打开项目点击菜单中的pull就可以同步过来了。
+
+克隆项目 
+打开Git Bash输入以下命令
+
+cd d:/project   //指定存放的目录
+git clone https://github.com/youtname/your repository.git     //你的仓库地址
+1
+2
+或者另一种方法 
+5、安装成功后打开终端 
+cd ~进入根目录 
+输入命令ssh-keygen生成ssh-key，如果有提示，一直按回车 
+这里写图片描述
+6、将SSH key添加到GitHub。登录到GitHub页面，Account Settings->SSH Public Keys->Add another key 
+将生成的key(id_rsa.pub文件）内容copy到输入框中，save。 
+commd+shift+g进入/Users/chen/.ssh/就可以看得见私钥和公钥 
+私钥的名字是 id_rsa，是服务器确定你身份的唯一凭证。 
+公钥的名字是id_rsa.pub。把这个文件发给仓库管理员，仓库管理员会把这个公钥放到服务器上，以后git就通过上面的私钥跟服务器交互了。如果使用github就是自己把公钥内容添加上去 
+7、找一个目录执行git clone http://xxx.git（从服务器端克隆git库，当然这个要服务器管理员给你权限和帐号），以后xxx目录就是一个git目录，可以在这个目录下执行git操作
+
+四、 linux基础命令
+sudo -s   获取绝对用户权限
+cd xxx    进入xxx目录
+ls (-a/-A)   显示当前路径下所有文件(隐藏的)
+pwd       显示当前绝对路径
+mkdir  xxx   创建文件夹xxx
+man xxx     查看xxx命令手册
+
+然后介绍下Git基础命令的含义；
+clone   克隆远程仓库
+init       初始化仓库
+remote 连接远程仓库
+pull      从远程仓库下拉获取新数据
+push    将本地仓库新增或修改文件上传到远程仓库
+add     添加文件或者修改文件，commit以及push之前使用
+log      当前仓库提交过的日志信息
+status  当前仓库版本状态
+commit 提交到当前仓库中
+branch 分支命令，相关增删查操作
+checkout 使用远程仓库最后一个版本完全覆盖当前仓库内容／选择分支branch
+diff      对比版本内容
+merge   合并版本内容
