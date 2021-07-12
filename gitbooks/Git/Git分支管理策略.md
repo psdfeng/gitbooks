@@ -16,8 +16,17 @@ git checkout test
 # 新建分支推送到服务器
 `git push --set-upstream origin develop`
 
-
-
+# 删除本地分支和远程分支
+```
+删除分支前先切换到其他分支
+1. git checkout dev 
+删除本地分支
+2. git branch -D tmp
+查看远程分支
+3. git branch -r
+删除远程分支
+4. git push origin --delete tmp
+```
 # 一、主分支Master
 
 首先，代码库应该有一个、且仅有一个主分支。所有提供给用户使用的正式版本，都在这个主分支上发布。
@@ -42,6 +51,8 @@ Git创建Develop分支的命令：
 
 　　# 对Develop分支进行合并
 　　git merge --no-ff develop
+    # 合并后推送
+    git push
 ```
 这里稍微解释一下，上一条命令的--no-ff参数是什么意思。默认情况下，Git执行"快进式合并"（fast-farward merge），会直接将Master分支指向Develop分支。
 
