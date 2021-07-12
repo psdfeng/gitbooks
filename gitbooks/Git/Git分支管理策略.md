@@ -1,4 +1,19 @@
 
+# git branch查看当前分支
+有颜色表示当前分支
+```
+git branch
+```
+# git branch test 创建分支，不切换
+```
+git branch test
+git branch
+```
+# git checkout 切换分支
+```
+git checkout test
+```
+
 # 一、主分支Master
 
 首先，代码库应该有一个、且仅有一个主分支。所有提供给用户使用的正式版本，都在这个主分支上发布。
